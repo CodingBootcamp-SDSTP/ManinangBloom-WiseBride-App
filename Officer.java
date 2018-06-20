@@ -3,10 +3,10 @@ class Officer
 	private final String ID;
 	private String firstName;
 	private String lastName;
-	private int contactNumber;
+	private String contactNumber;
 	private String department;
 
-	public Officer(String id, String fn, String ln, int a, String dept) {
+	public Officer(String id, String fn, String ln, String a, String dept) {
 		ID = id;
 		firstName = fn;
 		lastName = ln;
@@ -34,11 +34,11 @@ class Officer
 		return(lastName);
 	}
 
-	public void setContactNumber(int a) {
+	public void setContactNumber(String a) {
 		contactNumber = a;
 	}
 
-	public int getContactNumber() {
+	public String getContactNumber() {
 		return(contactNumber);
 	}
 
