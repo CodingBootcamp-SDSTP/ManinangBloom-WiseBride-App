@@ -1,0 +1,87 @@
+<html>
+	<head><title>Supplier Collection</title></head>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<script src="apps.js"></script>
+	</head>
+	<script>
+		window.onload = function() {
+			var sessionid = "";
+			var login = document.getElementById('submit').onclick = function() {
+				let un = document.getElementById('username').value;
+				let pw = document.getElementById('password').value;
+				let rq = new XMLHttpRequest();
+				rq.onreadystatechange = function() {
+					if(rq.readyState == 4) {
+						sessionid = rq.responseText;
+						let sid = document.getElementById('sid');
+						sid.innerHTML = "Session ID: " + sessionid;
+					}
+				}
+				rq.open("GET", "/login?username="+un+"&password="+pw, true);
+				rq.send();
+			};
+			document.getElementById('logout').onclick = function() {
+				let rq = new XMLHttpRequest();
+				rq.onreadystatechange = function() {
+					if(rq.readyState == 4) {
+						sessionid = "";
+						document.getElementById('sid').innerHTML = "Session ID:";
+					}
+				}
+				rq.open("GET", "/logout>id="+sessionid, true);
+				rq.send();
+			};
+			let suppliers = document.getElementById('suppliers');
+			suppliers.onclick = function() {
+				let rq = new XMLHttpRequest();
+				rq.onreadystatechange = function() {
+					if(rq.readyState == 4) {
+						let container = document.getElementById('container');
+						container.innerHTML = "";
+						container.innerHTML = rq.responseText;
+					}
+				}
+				rq.open("GET", "/supplier?id="+sessionid, true);
+				rq.send();
+			};
+			document.getElementById('addsupplier').onclick = function() {
+				let rq = new XMLHttpRequest();
+				rq.onreadystatechange = function() {
+					if(rq.readyState == 4) {
+					}
+				}
+				rq.open("POST", "/suppliers?id="+sessionid, true);
+				rq.setRequestHeader("Content-Type", "application/json");
+				rq.send(JSON.stringify({
+					name : document.getElementById('name').value,
+					location : document.getElementById('loc').value,
+					assignedto : document.getElementById('assignee').value,
+					type : document.getElementById('type').value
+				}));
+			}
+		}
+	</script>
+	</head>
+	<body>
+		<h1 id = "h1">Wise Bride</h1>
+		<h2 id = "h2">wedding supplier finder</h2>
+		<div id = "section">
+			<div id = "wrapper">
+				<form id = "form">
+					<p><input type="text" id="username" placeholder="Username"></p>
+					<p><input type="password" id="password" placeholder="Password"></p>
+					<p><input type="submit" id="submit" value="Login"><input type="submit" id="logout" value="Logout"/></p>
+					<p><input type="text" id="name" placeholder="Name" /></p>
+					<p><input type="text" id="loc" placeholder="Location" /></p>
+					<p><input type="text" id="assignee" placeholder="Assigned to" /></p>
+					<p><input type="text" id="type" placeholder="Type" /></p>
+					<p></p><input type="submit" id="addsupplier" value="Add Supplier" /></p>
+					<p><a href="#" id="suppliers">Suppliers</a></p>
+					<p id="sid">Session ID: </p>
+				</form>
+			</div>
+		</div>
+		<div id="container">
+		</div>
+	</body>
+</html>
