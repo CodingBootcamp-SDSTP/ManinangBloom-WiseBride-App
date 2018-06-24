@@ -1,12 +1,10 @@
 <html>
-	<head><title>Supplier Collection</title></head>
-		<link rel="stylesheet" type="text/css" href="style.css"/>
-		<script src="apps.js"></script>
-	</head>
+	<head>
+	<title>WiseBrideApp</title>
 	<script>
 		window.onload = function() {
 			var sessionid = "";
-			var login = document.getElementById('submit').onclick = function() {
+			document.getElementById('submit').onclick = function() {
 				let un = document.getElementById('username').value;
 				let pw = document.getElementById('password').value;
 				let rq = new XMLHttpRequest();
@@ -28,7 +26,7 @@
 						document.getElementById('sid').innerHTML = "Session ID:";
 					}
 				}
-				rq.open("GET", "/logout>id="+sessionid, true);
+				rq.open("GET", "/logout?id="+sessionid, true);
 				rq.send();
 			};
 			let suppliers = document.getElementById('suppliers');
@@ -41,7 +39,7 @@
 						container.innerHTML = rq.responseText;
 					}
 				}
-				rq.open("GET", "/supplier?id="+sessionid, true);
+				rq.open("GET", "/suppliers?id="+sessionid, true);
 				rq.send();
 			};
 			document.getElementById('addsupplier').onclick = function() {

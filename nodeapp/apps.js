@@ -20,13 +20,14 @@ handlers["/suppliers"] = function(req, res) {
 	doesSessionExist(id, function(reply) {
 		if(reply == 1) {
 			if(req.method == "POST") {
+				console.log("POST request testing");
 				var data = "";
 				req.on('data', function(dd) {
 					data += dd.toString();
 				});
 				req.on('end', function() {
 					let details = JSON.parse(data);
-					let content = "name" + details["name"]
+					let content = "name=" + details["name"]
 						+ "&location=" + details["location"]
 						+ "&assignedto=" + details["assignedto"]
 						+ "&type=" + details["type"];
@@ -57,7 +58,7 @@ handlers["/suppliers"] = function(req, res) {
 				const options = {
 					hostname: '127.0.0.1',
 					port: 8080,
-					path: '/wisebrideapp/suppliers',
+					path: '/wisebrideapp/suppliers'
 				};
 				const httpreq = http.request(options);
 				httpreq.end();
@@ -65,11 +66,11 @@ handlers["/suppliers"] = function(req, res) {
 					console.log("---------------response event");
 					let storeData = "";
 					resData.on('data', function(resData) {
-						console.log("---------------response event");
+						console.log("---------------data event");
 						storeData += resData;
 					});
 					resData.on('end', function() {
-						res.writeHead(200, { "Content-Type" : "text/xml"});
+						res.writeHead(200, { "Content-Type" : "text/plain"});
 						res.write(storeData);
 						res.end();
 					});
@@ -86,7 +87,7 @@ handlers["/login"] = function(req, res) {
 	let qs = querystring.parse(req.url);
 	let un = qs['/login?username'];
 	let pw = qs['password'];
-	res.writeHead(200, { "Content-Type" : "text/xml" });
+	res.writeHead(200, { "Content-Type" : "text/plain" });
 	db.users.findOne({ "username" : un, "password" : pw }, (err, docs) => {
 		if(docs != null) {
 			startSession(un, (id) => {
@@ -103,7 +104,7 @@ handlers["/login"] = function(req, res) {
 handlers["/logout"] = function(req, res) {
 	let qs = querystring.parse(req.url);
 	let id = qs['/suppliers?id'];
-	res.writeHead(200, { "Content-Type" : "text/xml" });
+	res.writeHead(200, { "Content-Type" : "text/plain" });
 	endSession(id, function() {
 		console.log("Session ended: " + id);
 		res.end();

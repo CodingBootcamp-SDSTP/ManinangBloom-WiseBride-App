@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<web-app>
+	<display-name>Servlet Sample</display-name>
+	<description>Sample App</description>
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/assetDB</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+		</resource-ref>
+	<servlet>
+		<servlet-name>All Suppliers</servlet-name>
+		<servlet-class>AllSuppliersServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>All Suppliers</servlet-name>
+		<url-pattern>/suppliers</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Add Supplier</servlet-name>
+		<servlet-class>AddSupplierServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Add Supplier</servlet-name>
+		<url-pattern>/addsupplier</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>All Officers</servlet-name>
+		<servlet-class>AllOfficersServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>All Officers</servlet-name>
+		<url-pattern>/officers</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>All Locations</servlet-name>
+		<servlet-class>AllLocationsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>All Locations</servlet-name>
+		<url-pattern>/locations</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Search</servlet-name>
+		<servlet-class>SearchServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Search</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+</web-app>

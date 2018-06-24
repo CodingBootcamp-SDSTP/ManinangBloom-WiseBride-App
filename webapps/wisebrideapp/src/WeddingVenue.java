@@ -3,17 +3,9 @@ public class WeddingVenue extends Supplier implements SupplierWithLocation, Assi
 	private String location;
 	private String assignedTo;
 
-	public WeddingVenue(String n) {
-
-		setName(n);
-		location = "";
-		assignedTo = "";
-	}
-
 	public WeddingVenue(String n, String loc, String a) {
 		assignedTo = a;
 		location = loc;
-
 		setName(n);
 	}
 
@@ -33,9 +25,9 @@ public class WeddingVenue extends Supplier implements SupplierWithLocation, Assi
 		return(location);
 	}
 
-	public String toString(SupplierManagerDatabase amd) {
+	public String toString(SupplierManagerDatabase sup) {
 		String officerDetails = "";
-		Officer officer = amd.getOfficerById(assignedTo);
+		Officer officer = sup.getOfficerById(assignedTo);
 		if(officer != null) {
 			officerDetails = "\nAssigned to: " + officer.toString();
 		}
@@ -44,6 +36,6 @@ public class WeddingVenue extends Supplier implements SupplierWithLocation, Assi
 
 	@Override
 	public String getDetails() {
-		return(super.getDetails() + "@" + location + "@" + assignedTo + "@weddingVenue");
+		return(super.getDetails() + "@" + location + "@" + assignedTo + "@weddingvenue");
 	}
 }

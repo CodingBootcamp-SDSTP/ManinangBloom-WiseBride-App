@@ -1,16 +1,16 @@
-public class Caterer extends Supplier implements SupplierWithLocation, AssignableSupplier, SpecialToString
+public class PhotographyServices extends Supplier implements SupplierWithLocation, AssignableSupplier, SpecialToString
 {
 	private String location;
 	private String assignedTo;
 
-	public Caterer(String n) {
+	public PhotographyServices(String n) {
 
 		setName(n);
 		location = "";
 		assignedTo = "";
 	}
 
-	public Caterer(String n, String loc, String a) {
+	public PhotographyServices(String n, String loc, String a) {
 		assignedTo = a;
 		location = loc;
 
@@ -33,9 +33,9 @@ public class Caterer extends Supplier implements SupplierWithLocation, Assignabl
 		return(location);
 	}
 
-	public String toString(SupplierManagerDatabase amd) {
+	public String toString(SupplierManagerDatabase sup) {
 		String officerDetails = "";
-		Officer officer = amd.getOfficerById(assignedTo);
+		Officer officer = sup.getOfficerById(assignedTo);
 		if(officer != null) {
 			officerDetails = "\nAssigned to: " + officer.toString();
 		}
@@ -44,6 +44,6 @@ public class Caterer extends Supplier implements SupplierWithLocation, Assignabl
 
 	@Override
 	public String getDetails() {
-		return(super.getDetails() + "@" + location + "@" + assignedTo + "@caterer");
+		return(super.getDetails() + "@" + location + "@" + assignedTo + "@photographyservices");
 	}
 }
